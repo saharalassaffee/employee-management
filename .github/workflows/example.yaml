@@ -1,4 +1,4 @@
-name: Create File
+name: Build and Push Docker Image
 
 on:
   push:
@@ -6,12 +6,21 @@ on:
       - main
 
 jobs:
-  message:
+  docker:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Create file
-        run: echo "This file was created by GitHub Actions" > message.txt
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Show file
-        run: cat message.txt
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build image
+        run: docker build -t sahar25abd/employee-app:latest .
+
+      - name: Push image
+        run: docker push sahar25abd/employee-app:latest
