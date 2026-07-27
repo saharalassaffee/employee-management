@@ -8,7 +8,10 @@ on:
 jobs:
   message:
     runs-on: ubuntu-latest
+steps:
+  - name: Create file
+    run: |
+      echo "This file was created by GitHub Actions" > message.txt
 
-    steps:
-      - name: Print message
-        run: echo "Hello, world!"
+  - name: Show file
+    run: cat message.txt
