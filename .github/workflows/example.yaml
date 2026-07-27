@@ -1,4 +1,4 @@
-name: Example
+name: Create File
 
 on:
   push:
@@ -8,10 +8,10 @@ on:
 jobs:
   message:
     runs-on: ubuntu-latest
-steps:
-  - name: Create file
-    run: |
-      echo "This file was created by GitHub Actions" > message.txt
 
-  - name: Show file
-    run: cat message.txt
+    steps:
+      - name: Create file
+        run: echo "This file was created by GitHub Actions" > message.txt
+
+      - name: Show file
+        run: cat message.txt
